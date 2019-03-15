@@ -1,0 +1,1 @@
+run `api` and `web` separately, each should start with `npm start`
