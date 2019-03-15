@@ -3,18 +3,24 @@ import { Physician } from "../services/Api";
 
 interface PhysiciansListProps {
   physicians: Physician[];
-  onSelectPhysician: (physician: Physician) => void;
+  onClickPhysician: (physician: Physician) => void;
+  selectedPhysician?: Physician;
 }
 
 export class PhysiciansList extends React.Component<PhysiciansListProps> {
   render() {
     return (
-      <div>
+      <div className="physicians">
         <h2>Physicians</h2>
         <ul>
-          {this.props.physicians.map(apt =>
-            <li key={"" + apt.id} onClick={(e) => this.props.onSelectPhysician(apt)}>{apt.lastName}, {apt.firstName}</li>
-          )}
+          {this.props.physicians.map(apt => {
+            var isCurrent = this.props.selectedPhysician && this.props.selectedPhysician.id == apt.id;
+            return (
+              <li className={isCurrent ? "current" : ""} key={"" + apt.id} onClick={(e) => this.props.onClickPhysician(apt)}>
+                {apt.lastName}, {apt.firstName}
+              </li>
+            )
+          })}
         </ul>
       </div>
     )

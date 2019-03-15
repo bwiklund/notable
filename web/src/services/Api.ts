@@ -6,6 +6,7 @@ export interface Physician {
   title: string;
   lastName: string;
   firstName: string;
+  email: string;
 }
 
 export interface Appointment {

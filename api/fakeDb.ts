@@ -6,6 +6,7 @@ export interface Physician {
   title: string;
   lastName: string;
   firstName: string;
+  email: string;
 }
 
 export interface Appointment {
@@ -30,15 +31,17 @@ export const fakeDb: FakeDb = {
 // make our fake values
 
 for (var i = 0; i < 10; i++) {
+  var lastname = faker.name.lastName();
   fakeDb.physicians.push({
     id: faker.random.alphaNumeric(16),
     firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
+    lastName: lastname,
+    email: lastname.toLowerCase() + "@notablehealth.com",
     title: "Dr."
   });
 }
 
-fakeDb.physicians.push({ id: "1", firstName: "Arlo", lastName: "Lobascio", title: "Dr." });
+fakeDb.physicians.push({ id: "1", firstName: "Arlo", lastName: "Lobascio", title: "Dr.", email: "arlo@lobascio.com" });
 
 fakeDb.physicians.forEach(p => {
   var num = 5 + Math.random() * 10;

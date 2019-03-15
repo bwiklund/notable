@@ -32,11 +32,25 @@ export class Calendar extends React.Component<any, CalendarState> {
 
   render() {
     var physician = this.state.selectedPhysician;
+
     return (
       <div className="calendar">
-        <PhysiciansList physicians={this.state.physicians || []} onSelectPhysician={(physician) => this.selectPhysician(physician)} />
-        <h2>{physician && (physician.title + " " + physician.firstName + " " + physician.lastName) }</h2>
-        <AppointmentsList appointments={this.state.appointments || []} />
+
+        <div className="sidebar">
+          <h1>notable</h1>
+          <PhysiciansList
+            physicians={this.state.physicians || []}
+            onClickPhysician={(physician) => this.selectPhysician(physician)}
+            selectedPhysician={this.state.selectedPhysician}
+          />
+        </div>
+
+        <div className="main">
+          <h2 className="physician-name">{physician && (physician.title + " " + physician.firstName + " " + physician.lastName)}</h2>
+          <h3 className="physician-email">{physician && physician.email}</h3>
+          <AppointmentsList appointments={this.state.appointments || []} />
+        </div>
+
       </div>
     )
   }
