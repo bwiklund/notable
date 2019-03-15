@@ -13,7 +13,7 @@ export class PhysiciansList extends React.Component<PhysiciansListProps> {
         <p>Physicianslist</p>
         <ul>
           {this.props.physicians.map(a =>
-            <li key={"" + a.id} onClick={(e) => this.props.onSelectPhysician(a.id)}>{a.firstName}</li>
+            <li key={"" + a.id} onClick={(e) => this.props.onSelectPhysician(a.id)}>{a.lastName}, {a.firstName}</li>
           )}
         </ul>
       </div>

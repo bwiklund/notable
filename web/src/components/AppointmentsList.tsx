@@ -9,7 +9,7 @@ export class AppointmentsList extends React.Component<{ appointments: Appointmen
         <p>AppointmentsList</p>
         <ul>
           {this.props.appointments.map(a =>
-            <li key={"" + a.id}>{a.firstName}</li>
+            <li key={"" + a.id}>{a.firstName} {a.lastName}</li>
           )}
         </ul>
       </div>

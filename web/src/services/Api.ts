@@ -9,6 +9,7 @@ export interface Physician {
 
 export interface Appointment {
   id: string;
+  physicianId: string;
   lastName: string;
   firstName: string;
   time: Date;
@@ -22,7 +23,7 @@ export const api = {
     return axios.get<Physician[]>(API_URL + "/physicians");
   },
 
-  getAppointments() {
-    return axios.get<Appointment[]>(API_URL + "/appointments");
+  getAppointments(physicianId: string) {
+    return axios.get<Appointment[]>(API_URL + "/appointments/" + physicianId);
   }
 }

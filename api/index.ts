@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as cors from "cors";
 import * as _ from "lodash";
+import * as faker from "faker";
 
 const app = express();
 
@@ -10,27 +11,63 @@ app.get("/", (req, res) => {
   res.send("hi");
 });
 
-app.get("/api/v1/physicians", (req, res) => {
-  var data = [
-    { id: "1", firstName: "Hibbert", lastName: "Julius" },
-    { id: "2", firstName: "Krieger", lastName: "Algernop" },
-    { id: "3", firstName: "Riviera", lastName: "Nick" },
-    { id: "4", firstName: "Arlo", lastName: "Lobascio" },
-  ];
 
-  res.send(data);
+// TODO copy pasted interfaces from frontend, should share code here
+export interface Physician {
+  id: string;
+  lastName: string;
+  firstName: string;
+}
+
+export interface Appointment {
+  id: string;
+  physicianId: string;
+  lastName: string;
+  firstName: string;
+  time: Date;
+  kind: string;
+}
+
+interface FakeDb {
+  physicians: Physician[],
+  appointments: Appointment[]
+}
+
+const fakeDb: FakeDb = {
+  physicians: [],
+  appointments: []
+}
+
+for (var i = 0; i < 10; i++) {
+  fakeDb.physicians.push({
+    id: faker.random.alphaNumeric(16),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+  });
+}
+
+fakeDb.physicians.push({ id: "1", firstName: "Arlo", lastName: "Lobascio" });
+
+fakeDb.physicians.forEach(p => {
+  var num = 5 + Math.random() * 10;
+  for (var i = 0; i < num; i++) {
+    fakeDb.appointments.push({
+      id: faker.random.alphaNumeric(16),
+      physicianId: (p as any).id,
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      time: faker.date.future(1),
+      kind: Math.random() > 0.5 ? "New Patient" : "Follow-up"
+    });
+  }
 });
 
-app.get("/api/v1/appointments", (req, res) => {
-  var data = _.shuffle([
-    { id: "1", firstName: "Sterling", lastName: "Archer", time: new Date, kind: "New Patient" },
-    { id: "2", firstName: "Cyril", lastName: "Figis", time: new Date, kind: "Follow-up" },
-    { id: "3", firstName: "Ray", lastName: "Gillette", time: new Date, kind: "Follow-up" },
-    { id: "4", firstName: "Lana", lastName: "Kaye", time: new Date, kind: "New Patient" },
-    { id: "5", firstName: "Pam", lastName: "Poovey", time: new Date, kind: "New Patient" },
-  ]);
+app.get("/api/v1/physicians", (req, res) => {
+  res.send(fakeDb.physicians);
+});
 
-  res.send(data);
+app.get("/api/v1/appointments/:id", (req, res) => {
+  res.send(fakeDb.appointments.filter(a => a.physicianId == req.params.id));
 });
 
 app.listen(3001);
