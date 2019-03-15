@@ -5,17 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
-    "dev": "ts-node index.ts --watch --poll"
+    "dev": "ts-node-dev index.ts --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.4",
     "@types/express": "^4.16.1",
     "@types/lodash": "^4.14.123",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "ts-node": "^8.0.3",
+    "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.3.3333"
   }
 }

@@ -1,7 +1,10 @@
 import * as express from "express";
+import * as cors from "cors";
 import * as _ from "lodash";
 
 const app = express();
+
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("hi");
