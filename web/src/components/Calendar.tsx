@@ -18,15 +18,15 @@ export class Calendar extends React.Component<any, CalendarState> {
   selectPhysician(id: string) {
     this.setState({ selectedPhysicianId: id });
 
-    api.getAppointments().then(data => {
-      this.setState({ appointments: data });
+    api.getAppointments().then(resp => {
+      this.setState({ appointments: resp.data });
     });
   }
 
   componentDidMount() {
-    api.getPhysicians().then(data => {
-      this.selectPhysician(data[0].id);
-      this.setState({ physicians: data });
+    api.getPhysicians().then(resp => {
+      this.selectPhysician(resp.data[0].id);
+      this.setState({ physicians: resp.data });
     });
   }
 
