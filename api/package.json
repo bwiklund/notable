@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
-    "dev": "ts-node index.ts --watch"
+    "dev": "ts-node index.ts --watch --poll"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.16.1",
+    "@types/lodash": "^4.14.123",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.3333"
   }
