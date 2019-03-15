@@ -5,7 +5,7 @@ import { Physician, Appointment, api } from "../services/Api";
 
 interface CalendarState {
   physicians?: Physician[];
-  selectedPhysicianId?: string;
+  selectedPhysician?: Physician;
   appointments?: Appointment[];
 }
 
@@ -15,25 +15,27 @@ export class Calendar extends React.Component<any, CalendarState> {
     this.state = {};
   }
 
-  selectPhysician(id: string) {
-    this.setState({ selectedPhysicianId: id });
+  selectPhysician(physician: Physician) {
+    this.setState({ selectedPhysician: physician });
 
-    api.getAppointments(id).then(resp => {
+    api.getAppointments(physician.id).then(resp => {
       this.setState({ appointments: resp.data });
     });
   }
 
   componentDidMount() {
     api.getPhysicians().then(resp => {
-      this.selectPhysician(resp.data[0].id);
+      this.selectPhysician(resp.data[0]);
       this.setState({ physicians: resp.data });
     });
   }
 
   render() {
+    var physician = this.state.selectedPhysician;
     return (
       <div className="calendar">
-        <PhysiciansList physicians={this.state.physicians || []} onSelectPhysician={(id) => this.selectPhysician(id)} />
+        <PhysiciansList physicians={this.state.physicians || []} onSelectPhysician={(physician) => this.selectPhysician(physician)} />
+        <h2>{physician && (physician.title + " " + physician.firstName + " " + physician.lastName) }</h2>
         <AppointmentsList appointments={this.state.appointments || []} />
       </div>
     )

@@ -3,6 +3,7 @@ import axios from "axios";
 
 export interface Physician {
   id: string;
+  title: string;
   lastName: string;
   firstName: string;
 }

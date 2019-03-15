@@ -3,6 +3,7 @@ import faker = require("faker");
 // TODO copy pasted interfaces from frontend, should share code here
 export interface Physician {
   id: string;
+  title: string;
   lastName: string;
   firstName: string;
 }
@@ -33,10 +34,11 @@ for (var i = 0; i < 10; i++) {
     id: faker.random.alphaNumeric(16),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
+    title: "Dr."
   });
 }
 
-fakeDb.physicians.push({ id: "1", firstName: "Arlo", lastName: "Lobascio" });
+fakeDb.physicians.push({ id: "1", firstName: "Arlo", lastName: "Lobascio", title: "Dr." });
 
 fakeDb.physicians.forEach(p => {
   var num = 5 + Math.random() * 10;

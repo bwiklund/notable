@@ -3,17 +3,17 @@ import { Physician } from "../services/Api";
 
 interface PhysiciansListProps {
   physicians: Physician[];
-  onSelectPhysician: (id: string) => void;
+  onSelectPhysician: (physician: Physician) => void;
 }
 
 export class PhysiciansList extends React.Component<PhysiciansListProps> {
   render() {
     return (
       <div>
-        <p>Physicianslist</p>
+        <h2>Physicians</h2>
         <ul>
-          {this.props.physicians.map(a =>
-            <li key={"" + a.id} onClick={(e) => this.props.onSelectPhysician(a.id)}>{a.lastName}, {a.firstName}</li>
+          {this.props.physicians.map(apt =>
+            <li key={"" + apt.id} onClick={(e) => this.props.onSelectPhysician(apt)}>{apt.lastName}, {apt.firstName}</li>
           )}
         </ul>
       </div>

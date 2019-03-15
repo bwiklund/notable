@@ -6,7 +6,6 @@ export class AppointmentsList extends React.Component<{ appointments: Appointmen
   render() {
     return (
       <div>
-        <p>AppointmentsList</p>
         <ul>
           {this.props.appointments.map(a =>
             <li key={"" + a.id}>{a.firstName} {a.lastName}</li>
