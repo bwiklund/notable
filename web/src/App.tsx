@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import {PhysiciansList} from "./components/PhysiciansList";
-import { AppointmentsList } from './components/AppointmentsList';
+import { Calendar } from './components/Calendar';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <PhysiciansList />
-        <AppointmentsList />
+        <Calendar />
       </div>
     );
   }
